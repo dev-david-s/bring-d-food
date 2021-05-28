@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useState } from 'react';
 import Header from '../components/Header'
+import RestaurantList from '../components/RestaurantList'
 
 export default function Home() {
+  const [query, updateQuery] = useState("");
+
   return (
     <div className="bg-page-light">
       <Head>
@@ -11,6 +15,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+      <div>
+        <input type="text" onChange={e => updateQuery(e.target.value.toLocaleLowerCase())}
+          value={query} />
+        <RestaurantList search={query} />
+      </div>
     </div>
   )
 }
