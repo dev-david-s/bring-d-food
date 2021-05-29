@@ -66,7 +66,9 @@ function RestaurantList(props) {
                 </div>
             );
         } else {
-            return <h1>No Restaurants Found</h1>;
+            return (<div>
+
+            </div>);
         }
     }
     return <h5>Add Restaurants</h5>;
