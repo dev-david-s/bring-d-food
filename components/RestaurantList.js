@@ -66,8 +66,9 @@ function RestaurantList(props) {
                 </div>
             );
         } else {
-            return (<div>
-
+            return (<div className="grid place-items-center">
+                <h1>No restaurants found!</h1>
+                <iframe src="https://giphy.com/embed/9J7tdYltWyXIY" width="480" height="404" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
             </div>);
         }
     }
