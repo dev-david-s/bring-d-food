@@ -15,11 +15,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div>
+      <main className="bg-gray-100 font-sans content p-6">
         <input type="text" onChange={e => updateQuery(e.target.value.toLocaleLowerCase())}
           value={query} />
         <RestaurantList search={query} />
-      </div>
+      </main>
     </div>
   )
 }
