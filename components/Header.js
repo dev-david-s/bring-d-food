@@ -1,7 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import AppContext from '../context/AppContext'
+import Link from 'next/link'
+import { logout } from '../lib/auth'
 
 const navigation = [
     { name: 'Home', href: '#', current: true },
@@ -11,7 +14,9 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Header() {
+export default function Header(props) {
+    const { user, setUser } = useContext(AppContext);
+    console.log(user)
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -59,8 +64,13 @@ export default function Header() {
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 {/* Profile dropdown */}
-                                <span className='hidden sm:inline-block bg-gray-900 text-white text-sm'>David Stanković</span>
-                                <Menu as="div" className="ml-3 relative">
+                                <span className='hidden sm:inline-block bg-gray-900 text-white text-sm'>
+                                    {user ? (user.username) :
+                                        <Link href="/register">
+                                            Sign Up
+                                        </Link>}
+                                </span>
+                                {user && <Menu as="div" className="ml-3 relative">
                                     {({ open }) => (
                                         <>
                                             <div>
@@ -102,22 +112,26 @@ export default function Header() {
                                                     </Menu.Item>
                                                     <Menu.Item>
                                                         {({ active }) => (
-                                                            <a
-                                                                href="#"
-                                                                className={classNames(
-                                                                    active ? 'bg-gray-100' : '',
-                                                                    'block px-4 py-2 text-sm text-gray-700'
-                                                                )}
-                                                            >
-                                                                Sign out
+                                                            <Link href="/">
+                                                                <a onClick={() => {
+                                                                    logout();
+                                                                    setUser(null);
+                                                                }}
+                                                                    className={classNames(
+                                                                        active ? 'bg-gray-100' : '',
+                                                                        'block px-4 py-2 text-sm text-gray-700'
+                                                                    )}
+                                                                >
+                                                                    Sign out
                                                             </a>
+                                                            </Link>
                                                         )}
                                                     </Menu.Item>
                                                 </Menu.Items>
                                             </Transition>
                                         </>
                                     )}
-                                </Menu>
+                                </Menu>}
                             </div>
                         </div>
                     </div>
