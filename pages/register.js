@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import AppContext from "../context/AppContext";
+import { registerUser } from "../lib/auth";
 
 const Register = () => {
     const [data, setData] = useState({ email: "", username: "", password: "" });

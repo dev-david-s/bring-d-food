@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
+import { login } from "../lib/auth";
+
 
 const Login = (props) => {
     const [data, updateData] = useState({ identifier: "", password: "" });
@@ -58,6 +60,20 @@ const Login = (props) => {
                         className="w-full text-center py-3 rounded bg-gray-500 hover:bg-gray-600 text-white hover:bg-green-dark focus:outline-none my-1"
                     >
                         {loading ? "Loading.." : "Log In"}</button>
+                    <p>{Object.entries(error).length !== 0 &&
+                        error.constructor === Object &&
+                        error.message.map((error) => {
+                            return (
+                                <div
+                                    key={error.messages[0].id}
+                                    style={{ marginBottom: 10 }}
+                                >
+                                    <small style={{ color: "red" }}>
+                                        {error.messages[0].message}
+                                    </small>
+                                </div>
+                            );
+                        })}</p>
 
                     <div className="text-center text-sm text-grey-dark mt-4">
                         By signing up, you agree to the
