@@ -54,9 +54,14 @@ function RestaurantList(props) {
                                         </div>
                                         <div className="flex p-4 pb-2 border-t border-gray-200 "></div>
                                         <div className="flex justify-end space-x-3 text-sm font-medium">
-                                            <button
-                                                className="mb-2 md:mb-0 bg-gray-800 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-gray-600"
-                                                type="button" aria-label="like">Visit Restaurant</button>
+                                            <Link
+                                                as={`/restaurants/${res.id}`}
+                                                href={`/restaurants?id=${res.id}`}
+                                            >
+                                                <a
+                                                    className="mb-2 md:mb-0 bg-gray-800 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-gray-600"
+                                                    aria-label="like">Visit Restaurant</a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
