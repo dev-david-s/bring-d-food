@@ -4,6 +4,10 @@ import { gql } from "apollo-boost";
 import Header from "../../components/Header";
 import Link from "next/link";
 
+import Cart from "../../components/Cart";
+import AppContext from "../../context/AppContext";
+import { useContext } from "react";
+
 const GET_RESTAURANT_DISHES = gql`
   query($id: ID!) {
     restaurant(id: $id) {
@@ -23,6 +27,7 @@ const GET_RESTAURANT_DISHES = gql`
 `;
 
 function Restaurants(props) {
+    const appContext = useContext(AppContext);
     const router = useRouter();
     const { loading, error, data } = useQuery(GET_RESTAURANT_DISHES, {
         variables: { id: router.query.id },
@@ -65,19 +70,17 @@ function Restaurants(props) {
                                         </div>
                                     </div>
                                     <div className="flex justify-end space-x-3 text-sm font-medium">
-                                        <Link
-                                            as={`/restaurants/${res.id}`}
-                                            href={`/restaurants?id=${res.id}`}
-                                        >
-                                            <a
-                                                className="mb-2 md:mb-0 bg-gray-800 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-gray-600"
-                                                aria-label="like">Visit Restaurant</a>
-                                        </Link>
+                                        <a onClick={() => appContext.addItem(res)}
+                                            className="mb-2 md:mb-0 bg-gray-800 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-gray-600"
+                                            aria-label="like">+ Add To Cart</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     ))}
+                    <div className="">
+                        <Cart />
+                    </div>
                 </div>
             </>
         );
