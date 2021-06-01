@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useContext } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { BellIcon, MenuIcon, ShoppingCartIcon, XIcon } from '@heroicons/react/outline'
 import AppContext from '../context/AppContext'
 import Link from 'next/link'
 import { logout } from '../lib/auth'
@@ -154,6 +154,20 @@ export default function Header(props) {
                                                 >
                                                     <Menu.Item>
                                                         {({ active }) => (
+                                                            <Link href="/cart">
+                                                                <a
+                                                                    className={classNames(
+                                                                        active ? 'bg-gray-100' : '',
+                                                                        'block px-4 py-2 text-sm text-gray-700'
+                                                                    )}
+                                                                >
+                                                                    Shopping Cart
+                                                        </a>
+                                                            </Link>
+                                                        )}
+                                                    </Menu.Item>
+                                                    <Menu.Item>
+                                                        {({ active }) => (
                                                             <a
                                                                 href="#"
                                                                 className={classNames(
@@ -187,6 +201,13 @@ export default function Header(props) {
                                         </>
                                     )}
                                 </Menu>}
+
+                                <Link href="/cart">
+                                    <button className="hidden sm:inline-block pl-2 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                        <span className="sr-only">View Cart</span>
+                                        <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,7 @@ function Restaurants(props) {
     if (data.restaurant) {
         const { restaurant } = data;
         return (
-            <>
+            <div className="bg-gray-100 h-screen">
                 <Header />
                 <div className="flex w-full justify-center p-6 bg-gray-200">
                     <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">{restaurant.name}</h2>
@@ -78,11 +78,8 @@ function Restaurants(props) {
                             </div>
                         </div>
                     ))}
-                    <div className="">
-                        <Cart />
-                    </div>
                 </div>
-            </>
+            </div>
         );
     }
     return <h1>Add Dishes</h1>;

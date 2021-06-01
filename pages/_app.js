@@ -60,7 +60,6 @@ class MyApp extends App {
     if (!newItem) {
       //set quantity property to 1
       item.quantity = 1;
-      console.log(this.state.cart.total, item.price);
       this.setState(
         {
           cart: {
